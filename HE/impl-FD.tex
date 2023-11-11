@@ -1,0 +1,21 @@
+\subsection{Implicit FD (IFD) \texorpdfstring{\hfill $\mathcal{O}(\Delta t^1 + \Delta x^2)$}{O(t1+x2)}}
+    \vspace{-0.5em}
+    $$
+        \frac{u_i^{n+1} - u_i^{n}}{\Delta t} = \frac{u_{i+1}^{n+1} -2 u_{i}^{n+1} + u_{i-1}^{n+1}}{\Delta x^2}
+    $$
+    The given implicit FD scheme reduces to a matrix eq.:
+    $$(\mathbb{I} + \lambda \cdot \mathcal{A}) \cdot U^{n+1} = \boxed{
+        A \cdot U^{n+1} = U^n
+    }$$
+    $$
+        A = 
+        \begin{bmatrix}
+            1+2\lambda & -\lambda &  0 & 0 & \dots & 0 \\
+            -\lambda &  1+2\lambda & -\lambda & 0 & \dots & 0 \\
+            \vdots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+            0 & \dots & 0 & -\lambda &  1+2\lambda & -\lambda \\
+            0 & \dots & 0 & 0 &  -\lambda &  1+2\lambda 
+        \end{bmatrix}
+    $$
+    \subsubsection{Stability IFD}
+        The IFD scheme is termed \textit{unconditionally stable}.

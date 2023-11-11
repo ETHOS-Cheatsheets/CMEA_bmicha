@@ -1,0 +1,25 @@
+%!Tex root=ZF_bmicha_CMEA.tex
+\subsection{Solving \texorpdfstring{$A \cdot U = F$}{A*U=F}}
+    \subsubsection{Inhomogeneous BC}
+        \vspace{-0.5em}
+        $$
+            \begin{cases}
+                -\Delta u = f & \textrm{in } \Omega\\
+                u\rvert_{\partial \Omega} \, = g
+            \end{cases}
+        $$
+        Let $\tilde{g}: \Omega \to \mathbb{R}$  s.t. $\tilde{g}\big(\partial \Omega\big) = g$ and
+        $$
+            v = u - \tilde{g} \qquad \Rightarrow \qquad v\rvert_{\partial \Omega} = 0.
+        $$
+        Solve 
+        $$
+            \begin{cases}
+                -\Delta v = f - \Delta g\\
+                v\rvert_{\partial \Omega} \, \equiv 0.
+            \end{cases}
+        $$
+        $$\boxed{%
+            u = v + g%
+        }$$
+        \vspace{-0.75em}

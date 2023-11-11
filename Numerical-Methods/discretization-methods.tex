@@ -1,0 +1,80 @@
+\subsection{Discretization Methods}
+    \subsubsection{Forward Euler (FE) - explicit \texorpdfstring{\hfill $\mathcal{O}(\Delta t^1)$}{O(t1)}}
+        \vspace{0.5em}
+        \densify{Left Rectangle QR with $\Delta t = t^{n+1}- t^n$ yields:
+        $$
+            \int_{t^n}^{t^{n+1}} F(t,u(t)) \ dt = \Delta t \cdot F(t^n, u(t^n))
+        $$}
+        \mathbox{
+            u^{n+1} = u^n + \Delta t \cdot F(t^n,u^n)
+        }
+        \begin{minipage}{0.91\linewidth}
+            \begin{itemize}
+                \item[$\oplus$] easy, cheap (computation wise)
+                \item[$\ominus$] limited stability 
+            \end{itemize}
+        \end{minipage}
+        \begin{minipage}{0.08\linewidth}
+            \begin{tabular}{c|c}
+                0&0\\\hline
+                &1
+            \end{tabular}            
+        \end{minipage}
+    \subsubsection{Backward Euler (BE) - implicit \texorpdfstring{\hfill $\mathcal{O}(\Delta t^1)$}{O(t1)}}\label{subsubsec::BE}
+        \vspace{0.5em}
+        \densify{Right Rectangle QR yields:
+        $$
+            \int_{t^n}^{t^{n+1}} F(t,u(t)) \ dt = \Delta t \cdot F\left(t^{n+1}, u\left(t^{n+1}\right)\right)
+        $$}
+        \mathbox{
+            u^{n+1} = u^n + \Delta t \cdot F\left(t^{n+1},u^{n+1}\right)
+        }
+        \begin{minipage}{0.91\linewidth}
+            \begin{itemize}
+                \item[$\oplus$] stable, cheap (if invertible)
+                \item[$\ominus$] expensive (if !invertible) $\rightarrow$ Newton's M.
+            \end{itemize}
+        \end{minipage}
+        \begin{minipage}{0.08\linewidth}
+            \begin{tabular}{c|c}
+                1&1\\\hline
+                &1
+            \end{tabular}            
+        \end{minipage}
+    \subsubsection{Midpoint - explicit \texorpdfstring{\hfill $\mathcal{O}(\Delta t^2)$}{O(t2)}}
+        \vspace{0.5em}
+        \densify{Midpoint QR yields:
+        $$
+            \int_{t^{n-1}}^{t^{n+1}} F(t,u(t)) \ dt = 2 \Delta t \cdot F(t^{n}, u(t^{n}))
+        $$}
+        \mathbox{
+            u^{n+1} = u^{n-1} + 2 \Delta t \cdot F(t^{n},u^{n})
+        }\vspace{-1em}
+        \mathbox{
+            u^{n+\frac{1}{2}} = u^{n-\frac{1}{2}} + \Delta t \cdot F(t^{n},u^{n})
+        }
+        \begin{itemize}
+            \item[$\oplus$] more accurate
+            \item[$\ominus$] memory intensive, "jumpstart" (need for two IV)
+        \end{itemize}
+    \subsubsection{Trapezoidal - implicit \texorpdfstring{\hfill $\mathcal{O}(\Delta t^2)$}{O(t2)}}\label{subsubsec::trapezoidal_DM}
+        \vspace{0.5em}
+        \densify{Trapezoidal QR yields:
+        $$
+            \int_{t^{n}}^{t^{n+1}} F \ dt = \Delta t \cdot \frac{F(t^{n}, u(t^{n})) + F\left(t^{n+1}, u(t^{n+1})\right)}{2}
+        $$}
+        \mathbox{
+            u^{n+1} = u^{n} +  \Delta t \cdot \frac{F(t^{n}, u^{n}) + F\left(t^{n+1}, u^{n+1}\right)}{2}
+        }
+        \begin{minipage}{0.9\linewidth}
+            \begin{itemize}
+                \item[$\oplus$] more accurate
+                \item[$\ominus$] expensive (if !invertible) $\rightarrow$ Newton's M.
+            \end{itemize}
+        \end{minipage}
+        % \begin{minipage}{0.08\linewidth}
+        %     \begin{tabular}{c|c}
+        %         1&1\\\hline
+        %         &1
+        %     \end{tabular}            
+        % \end{minipage}

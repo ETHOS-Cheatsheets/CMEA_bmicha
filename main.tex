@@ -1,14 +1,70 @@
-\documentclass{cheatsheet}
-\usepackage{bm}
-\usepackage{textcomp, mathcomp}
-\usepackage{empheq}
-\usepackage{pbox}
-\usepackage{booktabs}
+\documentclass[8pt]{mpscheatsheet}
+\usepackage{amsmath, amssymb, mathtools, empheq, physics}
+\usepackage{xcolor}
+\usepackage{graphicx}
 
-\doctitle{... Cheatsheet}
-\author{AUTHOR \\ \vspace*{-0.2em}}
+\author{Micha Bosshart - bmicha@ethz.ch}
+\title{CMEA}
+
+% hide argument given to densify
+\newcommand{\densify}[1]{}
+
+\newcommand{\mathbox}[2][]{%
+    \begin{center}%
+        \boxed{#2} #1
+    \end{center}%
+}
 
 \begin{document}
-\section{1. Section}
-	\input{src/1_section/1_subsection.tex}
+    \section{ODE}
+        \input{ODE/definitions.tex}
+        \input{ODE/tricks.tex}
+        \input{ODE/ivp.tex}
+    \section{Numerical Methods}
+        \vspace{-1em}\begin{align*}u'(t) &=F(t,u(t))\\u(0) &= u_0\end{align*}
+        \input{Numerical-Methods/discretization.tex}
+        \input{Numerical-Methods/quadrature-rules.tex}
+        \input{Numerical-Methods/discretization-methods.tex}
+        \input{Numerical-Methods/newtons-method.tex}
+        \vfill \null \columnbreak
+    \section{Error}
+        \input{Error/truncation_error.tex}
+        \input{Error/empirical_error.tex}
+        \input{Error/one-step_global-error.tex}
+    \section{Higher Order Finite Difference NM}
+        \input{Higher-Order-FM-NM/RK2.tex}
+        \input{Higher-Order-FM-NM/RK4.tex}
+        \input{Higher-Order-FM-NM/RK-N.tex}
+    \section{Poisson Equation (PE)}
+        \input{PE/PE.tex}
+        \input{PE/1D-PE-FDM.tex}
+        \input{PE/2D-PE-FDM.tex}
+        \input{PE/1D-PE-FEM.tex}
+        \input{PE/2D-PE-FEM.tex}
+    \section{FEM Implementation}
+        \input{FEM-Implementation/mesh.tex}
+        \input{FEM-Implementation/stiffness_load.tex}
+        \input{FEM-Implementation/assembly.tex}
+        \input{FEM-Implementation/solution.tex}
+    \section{Heat Equation (HE) / Parabolic PDE}
+        \input{HE/pre.tex}
+        \input{HE/exact-solution.tex}
+        \input{HE/energy-estimates.tex}
+        \input{HE/maximum-principle.tex}
+        \input{HE/expl-FD.tex}
+        \input{HE/impl-FD.tex}
+        \input{HE/crank-nicolson-scheme.tex}
+    \newpage
+    \section{Linear Transp. Eq. (LTE) / Hyperb. PDE}
+        \input{LTE/LTE.tex}
+        \input{LTE/method-of-characteristics.tex}
+        \input{LTE/C-FD.tex}
+        \input{LTE/upwind.tex}
+
+
+    \densify{
+    \section{Stability}
+        \input{Stability/stability.tex}
+    }
+   
 \end{document}

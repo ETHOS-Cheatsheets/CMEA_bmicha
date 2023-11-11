@@ -1,0 +1,113 @@
+\subsection{Poisson Equation (PE)}
+    \vspace{0.5em}
+    \mathbox{
+        -\Delta u = f
+    }
+\subsection{1D FD for PE}
+    \vspace{-0.5em}
+    $$
+        \begin{cases}
+            -u_{xx} &= f(x)\\
+            \phantom{-}u(0) &= u(1) = 0
+        \end{cases}
+    $$
+    \subsubsection{Solution}
+        \vspace{-1em}
+        \begin{align*}
+            u(x) &= \int_0^1 G(x,y) \cdot f(y) \cdot dy\\
+            G(x,y) &=
+            \begin{cases}
+                y(1-x)\quad 0 \leq y \leq x\\
+                x(1-y)\quad x \leq y \leq 1
+            \end{cases}
+        \end{align*}
+    \subsubsection{Numerics}
+        \vspace{-0.7em}
+        $$
+            \Delta x = \frac{1}{N+1}
+        $$
+        \textbf{Finite Difference Method (FDM)}
+        \begin{empheq}[box=\fbox]{align*}
+            u''(x_i) &\approx \frac{u'(x_{i+ 1/2}) - u'(x_{i - 1/2})}{\Delta x}\\[0.5em]
+                    &\approx \frac{u(x_{i+1}) - 2 u(x_i) + u(x_{i-1})}{\Delta x^2}
+        \end{empheq}
+        
+        For the PE follows:
+        $$
+            - u(x_{i-1}) + 2 u(x_i) - u(x_{i+1}) = \Delta x^2 \cdot f(x_i)
+        $$
+        Which can be written as:
+        \mathbox{A \cdot U = F}
+        $$
+            \!\!\!
+            \begin{bmatrix}
+                2 & -1 &  0 & 0 & \dots & 0 \\
+                -1 &  2 & -1 & 0 & \dots & 0 \\
+                \vdots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+                0 & \dots & 0 & -1 &  2 & -1 \\
+                0 & \dots & 0 & 0 &  -1 &  2 
+            \end{bmatrix}
+            \!\!\!
+            \begin{bmatrix}
+                u(x_1) \\ u(x_2) \\ \vdots \\ \vdots\\ u(x_N)
+            \end{bmatrix}
+            \!\!
+            = 
+            \!\!
+            \begin{bmatrix}
+                f(x_1) \\ f(x_2) \\ \vdots \\ \vdots\\ f(x_N)
+            \end{bmatrix}
+            \!
+            \Delta x^2
+        $$
+\subsection{2D FD for PE}
+    \vspace{-0.5em}
+    $$
+        \begin{cases}
+            -u_{xx} - u_{yy} &= f(x,y)\\
+            \phantom{-}u\rvert_{\partial \Omega} &= 0
+        \end{cases}
+    $$
+    $$
+        \Delta x = \frac{1}{N_x+1} \qquad \Delta y = \frac{1}{N_y+1}
+    $$
+    \subsubsection{Solution for $N_x = N_y = N$}
+        \vspace{0.5em}
+        \mathbox{A \cdot U = F}
+        $$
+                \!\!\!
+                \begin{bmatrix}
+                    B & -\mathbb{I} &  0 & 0 & \dots & 0 \\
+                    -\mathbb{I} &  B & -\mathbb{I} & 0 & \dots & 0 \\
+                    \vdots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+                    0 & \dots & 0 & -\mathbb{I} &  B & -\mathbb{I} \\
+                    0 & \dots & 0 & 0 &  -\mathbb{I} &  B 
+                \end{bmatrix}
+                \cdot U
+                = 
+                \!\!
+                \begin{bmatrix}
+                    f(x_1,y_1) \\ f(x_1,y_2) \\ \vdots \\ \vdots\\ f(x_N,y_N)
+                \end{bmatrix}
+                \!
+                \Delta x^2
+            $$
+            $$
+                B \vcentcolon= 
+                \begin{bmatrix}
+                    4 & -1 &  0 & 0 & \dots & 0 \\
+                    -1 &  4 & -1 & 0 & \dots & 0 \\
+                    \vdots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+                    0 & \dots & 0 & -1 &  4 & -1 \\
+                    0 & \dots & 0 & 0 &  -1 &  4 
+                \end{bmatrix}
+                \in \mathbb{R}^{N \times N}
+            $$
+        \subsubsubsection{Lexicographical Ordering}
+            \vspace{0.5em}
+            $$
+                (1,1) < \dots < (1,N_y) < \dots < (N_x,1) < \dots (N_x, N_y)
+            $$
+            \mathbox{
+                u_{i,j}; \ (i,j) \quad \to \quad u_n;\ n = (i-1)\cdot N_y + j
+            }

@@ -1,0 +1,27 @@
+\subsection{Empirical Error}
+    \begin{enumerate}
+        \item Choose $F(u)$ s.t. $F(u) = u'$ with $F(u)$ known.
+        \item Choose a wide array of values for $N$.
+        \item Compute Empirical Error $\varepsilon_n$:
+    \end{enumerate}
+        \mathbox{\varepsilon_n =  \abs{u^N-u(T)}}
+    $$
+    \textit{Q: }\ \exists\alpha\ \textrm{ s.t. }\ \varepsilon_n = \mathcal{O}(N^{-\alpha})\ \textrm{?}
+    $$
+    \vspace{-1.5em}
+    \densify{
+        \subsubsection{Experimental Order of Convergence}
+            \vspace{0.5em}
+            \mathbox{
+                EOC(N,N') = \frac{\log(\varepsilon_n) -\log(\varepsilon_{n'})}{\log(N) - \log(N')}
+            }
+        \subsubsection{Read Order from loglog Plot}
+            \vspace{0.5em}
+            \begin{center}
+                \mathbox{\textrm{slope } \widehat{=} - \alpha}
+            \end{center}
+            \begin{align*}
+                N \rightarrow 10N& & \overset{\alpha = 1}{\longrightarrow}&& \varepsilon_N &\rightarrow \frac{1}{10} \cdot \varepsilon_N\\
+                                & & \overset{\alpha = 2}{\longrightarrow}&& \varepsilon_N &\rightarrow \frac{1}{100} \cdot \varepsilon_N
+            \end{align*}
+    }

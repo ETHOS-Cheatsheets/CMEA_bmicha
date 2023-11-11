@@ -1,0 +1,21 @@
+\subsection{Discretization}
+    \vspace{-1em}
+    $$
+        \textrm{Find }\ \{ u^n \}_{n=0}^N\ \textrm{  s.t. }\ u^n \approx u(t^n) \quad \forall n \in \{ 0,N \}
+    $$
+    \begin{align*}
+        \Delta t &\vcentcolon= \frac{T}{N} & \textrm{time step}\\
+        t^n &\vcentcolon= n \cdot \Delta t & \textrm{time level}      
+    \end{align*}
+    \densify{\subsubsection{Fundamental Thrm of Calculus (FTC)}
+        The FTC states:
+        $$
+            \int_a^b f'(x) \ dx = f(b) -f(a)
+        $$
+    \mathbox[(FTC)]{
+        u^{n+1} -  u^n = \int_{t^n}^{t^{n+1}} F(t, u(t)) \ dt
+    }}
+
+        
+
+    

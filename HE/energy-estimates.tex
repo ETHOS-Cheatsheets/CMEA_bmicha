@@ -1,0 +1,25 @@
+\subsection{Energy Estimates / Props of HE Sols}
+    Let $u$ be a solution to the HE. We define the energy function $\mathcal{E}$:
+    $$
+        \mathcal{E}(t) \vcentcolon= \frac{1}{2} \int_0^1 \lvert u(x,t)\rvert ^2 \, \dd x
+    $$
+    \subsubsection{Stability}{\label{subsubsec::HEstability}}
+        It can be shown that $\mathcal{E}(t) \leq \mathcal{E}(0)$, since
+        $$
+            \frac{\dd \mathcal{E}}{\dd t} = - \int_0^1 u_x^2 \, \dd x \leq 0.
+        $$
+        Therefore solutions to the HE are stable.
+    \subsubsection{Uniqueness}
+        Let $u, \bar{u}$ be solutions to the HE, and let $w \vcentcolon= u - \bar{u}$.
+        Using the knowledge from \ref{subsubsec::HEstability} it follows, that
+        $$
+            \int_0^1 w^2(x,t) \, \dd x \leq  \int_0^1 w^2(x,0) \, \dd x
+        $$
+        $$
+            \Rightarrow \int_0^1 w^2(x,t) \, \dd x \leq 0 \qquad (\textrm{Using IC})
+        $$
+        $$
+            \Rightarrow w(x,t) \equiv 0\quad \Longleftrightarrow\quad u(x,t) = \bar{u}(x,t)
+        $$
+        Hence, the HE has a unique solution.
+    

@@ -1,0 +1,48 @@
+\subsection{2D PE FDM \texorpdfstring{\hfill}{-} Dirichlet BC}\label{subsec::2DPEFDM}
+    \vspace{-0.5em}
+    $$
+        \Delta x = \frac{1}{N_x+1} \qquad \Delta y = \frac{1}{N_y+1}
+    $$
+    \begin{align*}
+        x_0 = 0, && x_{N_x+1} &= 1, && x_i = i \cdot \Delta x, && i = 1, \dots ,N_x\\
+        y_0 = 0, && y_{N_y+1} &= 1, && y_j = j \cdot \Delta y, && j = 1, \dots ,N_y
+    \end{align*}
+    Using Midpoint QR twice (central finite difference):
+    $$
+        u_{xx} = \frac{u_{i+1,j}-2u_{i,j}+u_{i-1,j}}{\Delta x^2}
+    $$
+    Plugging approximation for derivative into PE:
+    $$
+        - \frac{u_{i-1,j}-2u_{i,j}+u_{i+1,j}}{\Delta x^2} - \frac{u_{1,j-1}-2u_{i,j}+u_{i,j+1}}{\Delta y^2} = f
+    $$
+    With $N_x = N_y = N$ and BC $u\rvert_{\partial \Omega} \equiv 0$ we write:
+    \mathbox{A \cdot U = F}
+    $$
+        \!\!\!
+        \begin{bmatrix}
+            B & -\mathbb{I} &  0 & 0 & \dots & 0 \\
+            -\mathbb{I} &  B & -\mathbb{I} & 0 & \dots & 0 \\
+            \vdots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+            0 & \dots & 0 & -\mathbb{I} &  B & -\mathbb{I} \\
+            0 & \dots & 0 & 0 &  -\mathbb{I} &  B 
+        \end{bmatrix}
+        \cdot U
+        = 
+        \!\!
+        \begin{bmatrix}
+            f(x_1,y_1) \\ f(x_1,y_2) \\ \vdots \\ \vdots\\ f(x_N,y_N)
+        \end{bmatrix}
+        \!
+        \Delta x^2
+    $$
+    $$
+        B \vcentcolon= 
+        \begin{bmatrix}
+            4 & -1 &  0 & 0 & \dots & 0 \\
+            -1 &  4 & -1 & 0 & \dots & 0 \\
+            \vdots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+            0 & \dots & 0 & -1 &  4 & -1 \\
+            0 & \dots & 0 & 0 &  -1 &  4 
+        \end{bmatrix}
+        \in \mathbb{R}^{N \times N}
+    $$
