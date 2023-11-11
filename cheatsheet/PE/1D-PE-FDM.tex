@@ -1,0 +1,40 @@
+\subsection{1D PE FDM \texorpdfstring{\hfill}{-} Dirichlet BC}\label{subsec::1DPEFDM}
+    \vspace{-0.5em}
+    $$
+        \Delta x = \frac{1}{N+1}
+    $$
+    $$
+        x_0 = 0, \quad x_{N+1} = 1, \quad x_i = i \cdot \Delta x, \qquad i = 1, \dots ,N
+    $$
+    \mathbox{
+        u''(x_i) \approx \frac{u(x_{i+1}) - 2 u(x_i) + u(x_{i-1})}{\Delta x^2}
+    }
+    Plugging this approximation into the PE, it follows that:
+    $$
+        - u(x_{i-1}) + 2 u(x_i) - u(x_{i+1}) = \Delta x^2 \cdot f(x_i)
+    $$
+    With BC $u(0) = u(N+1) = 0$ we write:
+    \mathbox{A \cdot U = F}
+    $$
+        \!\!\!
+        \underbrace{\begin{bmatrix}
+            2 & -1 &  0 & 0 & \dots & 0 \\
+            -1 &  2 & -1 & 0 & \dots & 0 \\
+            \vdots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+            0 & \dots & 0 & -1 &  2 & -1 \\
+            0 & \dots & 0 & 0 &  -1 &  2 
+        \end{bmatrix}}_{ =\vcentcolon \mathcal{A}}
+        \!\!\!
+        \begin{bmatrix}
+            u(x_1) \\ u(x_2) \\ \vdots \\ \vdots\\ u(x_N)
+        \end{bmatrix}
+        \!\!
+        = 
+        \!\!
+        \begin{bmatrix}
+            f(x_1) \\ f(x_2) \\ \vdots \\ \vdots\\ f(x_N)
+        \end{bmatrix}
+        \!
+        \Delta x^2
+    $$
+    \vspace{-0.8em}

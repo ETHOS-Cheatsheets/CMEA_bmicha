@@ -1,0 +1,42 @@
+\subsection{Upwind Method}
+    \vspace{-1em}
+    \begin{align*}
+        a^+ \vcentcolon=& \max\{a,0\} \quad \textit{positive part}\\
+        a^- \vcentcolon=& \min\{a,0\} \quad \textit{negative part}\\
+    \end{align*}
+    \vspace{-2em}
+    % \begin{align*}
+    %     \frac{u_{i}^{n+1} - u_{i}^{n}}{\Delta t} &+ a^+(x_i,t^n) \cdot \frac{u_i^n - u_{i-1}^{n}}{\Delta x}\\ 
+    %                                              &+ a^-(x_i,t^n) \cdot \frac{u_{i+1}^n - u_{i}^{n}}{\Delta x} = 0
+    % \end{align*}
+    \begin{align*}
+        \underbrace{\frac{u_{i}^{n+1} - u_{i}^{n}}{\Delta t}}_{\textrm{FE}} + a^+ \cdot \underbrace{\frac{u_i^n - u_{i-1}^{n}}{\Delta x}}_{\textrm{BE}} + a^- \cdot \underbrace{\frac{u_{i+1}^n - u_{i}^{n}}{\Delta x}}_{\textrm{FE}} = 0
+    \end{align*}
+    Using $a^+ = \lvert a \rvert + a$ and $a^- = a - \lvert a \rvert$ we rewrite:
+    \vspace{0.25em}
+    % \begin{align*}
+    %     \frac{u_{i}^{n+1} - u_{i}^{n}}{\Delta t} + a(x_i,t^n) \cdot \frac{u_{i+1}^n - u_{i-1}^{n}}{2\Delta x}\\
+    %     = \frac{\lvert a (x_i,t^n) \rvert}{2 \Delta x} \cdot \left( u_{i+1}^n - 2 u_{i}^{n} + u_{i-1}^{n} \right)
+    % \end{align*}
+    \begin{align*}
+        \!\!\frac{u_{i}^{n+1} - u_{i}^{n}}{\Delta t} + a \frac{u_{i+1}^n - u_{i-1}^{n}}{2\Delta x}
+        \! = \! \frac{\lvert a \rvert}{2 \Delta x}\!\! \left( u_{i+1}^n - 2 u_{i}^{n} + u_{i-1}^{n} \right)
+    \end{align*}
+    \subsubsection{Stability - CFL Condition}
+        The upwind scheme is \textit{conditionally stable}.
+        $$
+            \abs{a} \frac{\Delta t}{\Delta x} \leq 1
+        $$
+    \subsubsection{Trapezoidal Timestepping}
+        Trapezoidal timestepping from (\ref{subsubsec::trapezoidal_DM}):
+        $$
+            \frac{u_t(t^n) + u_t(t^{n+1})}{2} = \frac{u_i^{n+1} - u_i^n}{\Delta t}.
+        $$
+        Using the linearity of the LTE the corresponding upwind method follows through superposition as:
+        $$
+            \frac{u_t(t^n) + u_t(t^{n+1})}{2} + a \cdot  \frac{u_x(t^n) + u_x(t^{n+1})}{2} = 0.
+        $$
+        Approximate $u_x(t^n)$ and $u_x(t^{n+1})$ with FE/BE depending on $a$:\\
+        For positive (negative) $a$, use BE (FE).
+    
+    

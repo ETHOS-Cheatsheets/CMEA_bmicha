@@ -1,0 +1,16 @@
+\subsection{One Step Error \texorpdfstring{$L_n$}{Ln}}
+    Insert exact solution into \textit{update form}.\\
+    If $u^n = u (t^n)$ exactly:
+    $$
+       \boxed{L_n \vcentcolon= \abs{u\left(t^{n+1}\right) - u^{n+1}}} = \Delta t \cdot T_n
+    $$
+    \vfill \null \columnbreak
+\subsection{Global Error \texorpdfstring{$E_n$}{En}}
+    \vspace{-0.5em}
+    $$
+        \boxed{E_n \vcentcolon= \sum_{j=0}^{n}L_j} \quad \leq \quad \sum_{j=0}^N L_j \approx N \cdot \Delta t \cdot T_n
+    $$
+    $$
+        \mathcal{O}(E_n) = \mathcal{O}(T_n)
+    $$
+    \vspace{-1.5em}

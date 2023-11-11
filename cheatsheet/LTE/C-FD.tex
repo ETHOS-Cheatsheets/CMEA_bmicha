@@ -1,0 +1,6 @@
+\subsection{Centered Finite Difference (C-FD)}
+\vspace{-0.5em}
+    $$
+        \frac{u_i^{n+1}-u_i^n}{\Delta t} + a(x_i,t^n) \cdot \frac{u_{i+1}^n-u_{i-1}^n}{2 \Delta x} = 0
+    $$
+    The C-FD is \textit{unconditionally unstable} since for $a>0$ (flowing to the right), we take information from left and right.

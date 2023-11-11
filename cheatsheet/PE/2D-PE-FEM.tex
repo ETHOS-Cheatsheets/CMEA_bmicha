@@ -1,0 +1,55 @@
+\subsection{2D PE FEM}
+    \vspace{-0.5em}
+    $$
+        (u,v)_{H_0^1(\Omega)} =  (f,v)_{L^2(\Omega)}
+    $$
+    \subsubsection{ \texorpdfstring{$H_0^1(\Omega)$}{H01(Omega)}}
+        \vspace{-1em}
+        $$
+        H_0^1(\Omega) =\! \left\{ w\! :\Omega \to \mathbb{R}: w\rvert_{\partial \Omega} = 0, \int_\Omega \lVert \nabla w(x) \rVert^2 dx <\! \infty \right\}
+        $$
+        \begin{align*}
+            \lVert w \rVert_{H_0^1(\Omega)} \vcentcolon=& \left( \int_\Omega \lVert \nabla w (x) \rVert^2 dx \right)^{\frac{1}{2}}\\
+            (u,v)_{H_0^1(\Omega)} \vcentcolon=& \int_\Omega \langle\nabla u(x) , \nabla v(x) \rangle\, dx
+        \end{align*}
+    \subsubsection{ \texorpdfstring{$L^2(\Omega)$}{L2(Omega)}}
+        \vspace{-1em}
+        \begin{align*}
+            L^2(\Omega) =& \left\{ w:  \Omega \to \mathbb{R}: \int_\Omega w^2(x)\, dx < \infty \right\}\\
+            \lVert w \rVert_{L^2(\Omega)} \vcentcolon=& \left( \int_\Omega w^2 (x)\, dx \right)^{\frac{1}{2}}\\
+            (u,v)_{L^2(\Omega)} \vcentcolon=& \int_\Omega u(x) v(x) \, dx
+        \end{align*}
+    \subsubsection{ \texorpdfstring{$1^{st}$}{first} Green Identity}
+        \vspace{-1em}
+        $$  
+            \int_\Omega \langle \nabla u, \nabla v \rangle \, \dd x = \int_{\partial \Omega} \langle v \nabla u, n \rangle \, \dd O - \int_\Omega v \cdot \Delta u \, \dd x
+        $$
+    \subsubsection{Divergence Theorem}
+        \vspace{-0.5em}
+        $$
+            \int_\Omega \nabla u \, \dd x = \int_{\partial\Omega} \langle u , n \rangle \, \dd O
+        $$
+    \vfill \null \columnbreak
+    \subsubsection{Finite Element Formulation}
+        \begin{itemize}
+            \item $T^h = \{ K_i \}_{i=1}^{M}$ is a \textbf{triangulation} with $M$ triangles.
+            \item $h = \max\limits_{K \in T^h}\textrm{diam}(K)$; $\textrm{diam}(K)$ being longest edge.
+            \item $\widetilde{\mathcal{N}}^h = \{ N_i \}_{i=1}^N$ are \textbf{interior nodes} of $T^h$,\\
+            $=\{ x \in \Omega: x \textrm{ is a vertex for some }K \in T^h, x \notin \partial \Omega \}$
+            \item $V^h =\{ v:\Omega \to \mathbb{R}: v \textrm{ cont, } v \rvert_{K} \textrm{ linear }\forall K, v \rvert_{\partial \Omega} = 0 \}$
+            \item Hat Functions form a basis of $V^h$, $\textrm{dim}(V^h) = N$
+            $$ \phi_i(\mathcal{N}_j) = \delta_{ij} \quad \forall \mathcal{N}_j \in \widetilde{\mathcal{N}}^h $$
+            \vspace{-1.5em}
+            $$ \rightarrow\quad  u(x) = \sum_{i=1}^N u_i \phi_i(x), \quad u_i = u(N_i) $$
+            \vspace{-1.5em}
+            \item The VF then becomes
+                $$
+                    \underbrace{\sum_{i=1}^N u_i}_{U_i} \cdot \underbrace{\int_\Omega \langle \nabla \phi_i, \nabla \phi_j \rangle dx}_{A_{ij}} = \underbrace{\int_\Omega f(x) \phi_j(x) dx}_{F_i}
+                $$
+                which can be written as $A\cdot U = F$, with $A$ as in \ref{subsec::2DPEFDM}.
+                % \begin{align*}
+                %     A_{ij} &= (\phi_i,\phi_j)_{H_0^1(\Omega)} = \int_\Omega \langle \nabla \phi_i, \nabla \phi_j \rangle dx \\
+                %     &= \sum_{K\in T^h} \int_K \langle \nabla \phi, \nabla \phi_j \rangle dx\\
+                %     F_i &= (f,\phi_i)_{L^2(\Omega)} = \int_\Omega f(x) \phi_i(x) dx
+                % \end{align*}
+        \end{itemize}

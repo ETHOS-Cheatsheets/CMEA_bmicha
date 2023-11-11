@@ -1,0 +1,14 @@
+\subsection{Runge-Kutta-4 (RK-4) \texorpdfstring{\hfill $\mathcal{O}(\Delta t^4)$}{O(t4)}}
+    \vspace{-1em}
+    $$
+        \begin{cases}
+            y_1 &= u^n\\
+            y_2 &= u^n +  \frac{\Delta t}{2} \cdot F(t^n, y_1)\\
+            y_3 &= u^n +  \frac{\Delta t}{2} \cdot F\left(t^{n+\frac{1}{2}}, y_2 \right)\\
+            y_4 &= u^n +  \Delta t \cdot F\left(t^{n+\frac{1}{2}}, y_3 \right)\\
+            u^{n+1} &= u^n +  \frac{\Delta t}{6} \cdot \left[ F(t^n, y_1) + 2 \cdot F\left(t^{n+\frac{1}{2}}, y_2 \right) \right.\\ 
+                    &\phantom{= u^n} \left. + 2 \cdot F\left(t^{n+\frac{1}{2}}, y_3 \right) + F\left(t^{n+1}, y_4 \right) \right]\\
+            u^0 &= u_0
+        \end{cases}
+    $$
+    \vspace{-0.5em}

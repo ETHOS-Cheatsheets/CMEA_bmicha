@@ -1,0 +1,26 @@
+\subsection{Newton's Method}
+    Needed for implementation of \textit{implicit} methods.\\[4pt]
+    \textbf{Goal:} Find $z$ s.t. $G(z) = 0$\\
+    \textbf{Algorithm:}
+    \begin{enumerate}
+        \item Choose "reasonable" $z_0$, $(G(z_0)\approx0)$
+        \item While $\left(\abs{G(z_k)} > \varepsilon\right)$
+            \mathbox{z_{k+1} = z_k - \frac{G(z_k)}{G'(z_k)}}\vspace{-7pt}
+        \item return $z_k$
+    \end{enumerate}
+    $$
+        G'_{i,j}(\boldsymbol{z})= \frac{\partial G(\boldsymbol{z})_i}{\partial \boldsymbol{z}_j}
+    $$
+    This method is \textbf{not guaranteed to converge}!\\
+    Implement maximal number of iterations.
+    \subsubsection{Example BE}
+        \vspace{-1em}
+        \begin{align*}
+            u' = F(t,u) \vcentcolon=&\ \sin(u)\\[3pt]
+            u^{n+1} =&\ u^n + \Delta t \cdot F(t^{n+1},u^{n+1})\\
+            u^{n+1} =&\ u^n + \Delta t \cdot \sin(u^{n+1})\\
+            z =&\ u^n + \Delta t \cdot \sin(z)\\
+            G(z) =&\  z - u^n - \Delta t \cdot \sin(z) = 0
+        \end{align*}
+        
+    

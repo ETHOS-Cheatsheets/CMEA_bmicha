@@ -1,0 +1,31 @@
+\subsection{Crank-Nicolson (CN) \texorpdfstring{\hfill $\mathcal{O}(\Delta t^2 + \Delta x^2)$}{O(t2+x2)}}
+    % {\tiny$\displaystyle{u_{xx}\left(x_j,t^n\right) + u_{xx}\left(x_j,t^{n+1}\right) = 2 u_{xx}}$}
+    \vspace{-0.5em}
+    {\tiny$$
+        u_{xx} \approx \frac{u_{xx}\left(x_j,t^n\right) + u_{xx}\left(x_j,t^{n+1}\right)}{2}
+    $$}
+    \vspace{-0.5em}
+    $$
+        \frac{u_i^{n+1}\! -u_i^n}{\Delta t}\! =\! \frac{u_{i-1}^n\! -2u_i^n\! +\! u_{i+1}^n}{2 \Delta x^2}\! +\! \frac{u_{i-1}^{n+1}\! -2u_i^{n+1}\! +u_{i+1}^{n+1}}{2 \Delta x^2} 
+    $$
+    Using $\lambda = \frac{\Delta t}{\Delta x^2}$ we can write the matrix form:
+    $$\!\left(\!\mathbb{I} + \frac{\lambda}{2} \mathcal{A}\!\right) U^{n+1} = \boxed{
+        A \cdot U^{n+1} = B \cdot U^n
+    } = \!\left(\!\mathbb{I} - \frac{\lambda}{2} \mathcal{A}\!\right) U^{n}\!
+    $$
+    $$
+        F_i^n = \frac{\lambda}{2} \cdot u_{i-1}^n + (1-\lambda) \cdot u_i^n + \frac{\lambda}{2} \cdot u_{i+1}^n
+    $$
+    $$
+        A = 
+        \begin{bmatrix}
+            1+\lambda & -\frac{\lambda}{2} &  0 & 0 & \dots & 0 \\
+            -\frac{\lambda}{2} &  1+\lambda & -\frac{\lambda}{2} & 0 & \dots & 0 \\
+            \vdots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+            0 & \dots & 0 & -\frac{\lambda}{2} &  1+\lambda & -\frac{\lambda}{2} \\
+            0 & \dots & 0 & 0 &  -\frac{\lambda}{2} &  1+\lambda 
+        \end{bmatrix}
+    $$
+    Flip written signs in A to obtain B.\\
+    \textbf{Unconditionally stable}\\
+    \textbf{Conditionally max/min principle verifying}

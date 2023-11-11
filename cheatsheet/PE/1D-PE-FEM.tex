@@ -1,0 +1,110 @@
+\subsection{1D PE FEM}
+    \subsubsection{Variational Formulation (VF) for 1D PE}
+        \vspace{-0.5em}
+        $$
+            \begin{cases}
+                u: \Omega \to \mathbb{R} &\quad \Omega \vcentcolon= [0,1]\\
+                u\rvert_{\partial \Omega} \equiv 0 
+            \end{cases}
+        $$
+        $$
+            J(u) = \frac{1}{2} \int\limits_\Omega \abs{u'(x)}^2 dx - \int\limits_\Omega f(x) u(x) dx
+        $$
+        \begin{center}
+            Find $u = \underset{v \in H_0^1}{\arg\ \min} \ J(v)$.
+        \end{center}
+        \subsubsubsection{Precise VF for 1D PE}
+            \begin{center}
+                Given $f \in L^2([0,1])$, find u $\in H_0^1([0,1])$\\[0.4em]
+                s.t. $\forall v \in H_0^1([0,1])$,
+            \end{center}
+            $$
+                \int_0^1 u'(x) v'(x) dx = \int_0^1 f(x) v(x) dx.
+            $$
+        \subsubsubsection{Definitions}
+            \begin{align*}
+                H_{\color{blue}0}^{\color{red}1}([0,1]) \vcentcolon= \\
+                \left\{ v[0,1] \to \mathbb{R}: v(0)=v(1)={\color{blue}0} \textrm{ and}  \int\limits_0^1 \lvert v^{\color{red}'}(x)\rvert^2 dx < \infty \right\}
+            \end{align*}
+            \textit{If continuous and piecewise smooth then mostly $u \in H_0^1$}\\[1em]
+            \textbf{Important Norms:}
+            \begin{align*}
+                \lVert u \rVert _{H_0^1([0,1])} &\vcentcolon= \left( \int_0^1 \lvert u'(x) \rvert^2 dx \right)^{\frac{1}{2}}\\
+                \lVert u \rVert _{L^2([0,1])}   &\vcentcolon= \left( \int_0^1 \lvert u(x) \rvert^2 dx \right)^{\frac{1}{2}}
+            \end{align*}
+        \subsubsubsection{Poincaré Inequality (PI)}
+            \vspace{0.5em}
+            $$
+                \lVert u \rVert _{L^2([0,1])} \leq \lVert u \rVert _{H_0^1([0,1])}
+            $$
+            \vspace{-0.5em}
+        \subsubsubsection{PDE $\to$ VF}
+            \begin{enumerate}
+                \item let $v \in H_0^1$
+                \item multiply PDE with $v$
+                \item integrate over $[0,1]$
+                \item integration by parts $+$ Zero-Dirichlet BC
+                \item Find $u \in H_0^1(\Omega)$ s.t. $\forall v \in H_0^1(\Omega),\ {\color{gray}(u',v') = (f,v)}$.
+            \end{enumerate}
+    \subsubsection{FEM Formulation}
+        \begin{itemize}
+            \item Discretize domain as in (\ref{subsec::1DPEFDM}) with $h = \Delta x$.
+            \item Vectorspace $V^h \subseteq V$ is N-dimensional.
+        \end{itemize}
+        \begin{align*}
+            V^h = \Big\{ w:[0,1] \to R: \,& w(0) = w(1) = 0, w \textrm{ continuous} , \\
+                                          & w \rvert_{[x_i,x_{i+1}]} \ i = 1, \dots N \textrm{ is linear} \Big\}
+        \end{align*}
+        \begin{itemize}
+            \item The Hat Functions form a basis of $V^h$.
+        \end{itemize}
+        \begin{align*}
+            \phi_i(x_j) &= 
+            \begin{cases}
+                1 & i = j\\
+                0 & \textrm{otw}
+            \end{cases}
+            \\
+            \phi_i(x) &= 
+            \begin{cases}
+                \frac{x-x_{i-1}}{h} & x \in [x_{i-1},x_i)\\
+                \frac{x_{i+1}-x}{h} & x \in [x_i,x_{i+1})\\
+                0 & \textrm{otw}
+            \end{cases}
+        \end{align*}
+        \begin{itemize}
+            \item Discrete Variational Formulation (DVF)
+        \end{itemize}
+        $$
+           (u_h,v)_{H_0^1(\Omega)} = \boxed{(u_h',v') = (v,f)} \qquad u_h,v \in V^h
+        $$
+        \begin{align*}
+            u_h = \sum\limits_{i=1}^N u_i \cdot \phi_i(x) && v = \sum \limits_{j=1}^N v_j \cdot \phi_j(x)
+        \end{align*}
+        Inserting the previous into the DVF we get
+        $$
+            \sum\limits_{i=1}^N u_i \cdot (\phi_i'(x), \phi_j'(x)) = (f,\phi_j) \qquad \forall j \in [1,\dots ,N],
+        $$
+        which can be written in matrix notation:
+        \mathbox{A \cdot U = F}
+        \begin{align*}
+            F_j &= (f,\phi_j) = h \cdot f_j\\
+            A_{ij} &= (\phi_i', \phi_j') = A_{ji}\\
+            A &= \frac{1}{h}
+            \begin{bmatrix}
+                2 & -1 &  0 & 0 & \dots & 0 \\
+                -1 &  2 & -1 & 0 & \dots & 0 \\
+                \vdots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+                0 & \dots & 0 & -1 &  2 & -1 \\
+                0 & \dots & 0 & 0 &  -1 &  2 
+            \end{bmatrix}
+        \end{align*}
+        \subsubsubsection{Error Analysis (1D \& 2D)}
+            \vspace{1em}
+            $$
+                \mathcal{O}(h^2) = \lVert u_h - u \rVert_{L^2}\quad \leq \quad \lVert u_h - u \rVert_{H_0^1} = \mathcal{O}(h)%
+            $$
+            $$
+                \textbf{1D: } \mathcal{O}(h^2) = \mathcal{O}(N^{-2}) \qquad \textbf{2D: } \mathcal{O}(h^2) = \mathcal{O}(N^{-1})
+            $$
+            higher dimension $\Rightarrow$ slower convergence w.r.t. $N$

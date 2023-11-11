@@ -1,0 +1,54 @@
+\subsection{Runge-Kutta-N (RK-N) - s-stage}
+    \vspace{-1em}
+    $$
+        \begin{cases}
+            y_1&=u_n+\Delta t \cdot \sum\limits_{j=1}^s a_{1j} \cdot F(t^{n+c_j},y_j)\\
+            y_2&=u_n+\Delta t \cdot \sum\limits_{j=1}^s a_{2j} \cdot F(t^{n+c_j},y_j)\\[-1em]
+               &\vdots\\[-0.75em]
+            y_s&=u_n+\Delta t \cdot \sum\limits_{j=1}^s a_{sj} \cdot F(t^{n+c_j},y_j)\\
+            u_{n+1}&=u_n+\Delta t \cdot \sum\limits_{j=1}^s b_j \cdot F(t^{n+c_j},y_j)\\
+            u_0&=u_0
+        \end{cases}
+    $$
+    \subsubsection{Butcher Tableau}
+        Any RK method is uniquely described by\densify{\\ $\{ a_{ij} \}_{i,j=1}^s$, $\{ b_{i} \}_{i=1}^s$ and $\{ c_{i} \}_{i=1}^s$.}
+        \begin{center}
+            \begin{tabular}{c|cccc}
+                $c_1$&$a_{11}$&$a_{12}$&$\cdots$&$a_{1s}$\\
+                $c_2$&$a_{21}$&$a_{22}$&$\cdots$&$a_{2s}$\\
+                $\vdots$&$\vdots$&$\vdots$&&$\vdots$\\
+                $c_s$&$a_{s1}$&$a_{s2}$&$\cdots$&$a_{ss}$\\\hline
+                &$b_1$&$b_2$&$\cdots$&$b_s$            
+            \end{tabular}
+        \end{center}
+
+        \subsubsubsection{Consistency \hfill $(\Delta t \rightarrow 0 \Rightarrow L_n \rightarrow 0)$}
+            Consistent iff the following conditions hold.
+            % Bigtime bug! '$$' math environment will have newpage effect.
+            \begin{center}
+                $\displaystyle{\sum_{j=1}^s b_j=1 \qquad \sum_{j=1}^s a_{ij}=c_i, \ \forall i}$
+            \end{center}
+        \subsubsubsection{Accuracy/ Order}
+            \begin{itemize}
+                \item At \textit{least} \textbf{second order} if:
+                    $$
+                        \sum_{j=1}^s b_j c_j =\frac{1}{2}
+                    $$
+                \item At \textit{least} \textbf{third order} if:
+                    $$
+                    \sum_{j=1}^s b_jc_j^2=\frac{1}{3} \qquad \sum_{j=1}^s\sum\limits_{i=1}^s b_ia_{ij}c_j=\frac{1}{6}
+                    $$
+                \item $\gamma$-order accuracy
+                    \begin{itemize}[label=$\rightarrow$]
+                        \item $\gamma <5$ at least $\gamma$ stages necessary 
+                        \item $\gamma \geq 5$ strictly more than $\gamma$ stages necessary
+                    \end{itemize}
+            \end{itemize}
+        \subsubsubsection{Explicitness}
+            Explicit iff $A=a_{ij}$ is \textit{strictly lower triangular}.
+            $$a_{ij} = 0 \quad \forall j\geq i$$
+            Time marching theme.
+        \subsubsubsection{Diagonally Implicit RK (DIRK)}
+            DIRK iff $A=a_{ij}$ is \textit{lower triangular}.
+            $$a_{ij} = 0 \quad \forall j > i$$
+            \vspace{-1em}

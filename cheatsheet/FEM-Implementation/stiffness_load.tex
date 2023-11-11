@@ -1,0 +1,36 @@
+%!Tex root=ZF_bmicha_CMEA.tex
+\subsection{Stiffness Matrices and Load Vectors}
+    % Let $K_m$ be the $m^{th}$ triangle of the triangulation $T^h$.
+    % $$
+    %     A_{ij} = \int_\Omega \langle \nabla \phi_i, \nabla \phi_j \rangle dx = \sum\limits_{m=1}^M \int_{K_m} \langle \nabla \phi_i, \nabla \phi_j \rangle dx
+    % $$
+    Using \textbf{Parametric Elements}, $\widehat{K}$ can be mapped to $K$ using the mapping $\Phi_K: \widehat{K} \to K$.
+    \begin{align*}
+        x = \Phi_K(\widehat{x}) &= (\mathcal{N}_b - \mathcal{N}_a \quad \mathcal{N}_c - \mathcal{N}_a) \cdot  \widehat{x} + \mathcal{N}_a\\
+                                &= J_K \cdot \widehat{x} + \mathcal{N}_a        
+    \end{align*}
+    $J_K$ being the Jacobian of $\Phi_K$.
+    \subsubsubsection{Local Element Stiffness Matrix}
+        \begin{align*}
+            A_{\alpha,\beta}^K &= \int_K \langle \nabla \phi_\alpha, \nabla \phi_\beta \rangle \, \dd x \\
+            &=\int_{\widehat{K}} \langle J_K^{-T}\, \widehat{\nabla} \widehat{\phi}_{\widehat{\alpha}}\, , \, J_K^{-T}\, \widehat{\nabla}\widehat{\phi}_{\widehat{\beta}} \rangle \,\, \lvert \det (J_K) \rvert \,\, \dd\widehat{x} 
+        \end{align*}
+        $$\boxed{%
+            \nabla \phi_\alpha(x) = J_K^{-T} \widehat{\nabla}\widehat{\phi}_\alpha(\widehat{x})
+        }$$
+            
+    \subsubsubsection{Local Element Load Vector}
+        \begin{align*}
+            F_\alpha^K &= \int_K f(x) \cdot \phi_\alpha(x) \dd x \\
+            &= \int_{\widehat{K}} f(\Phi_K(\widehat{x})) \cdot \widehat{\phi}_\alpha(\widehat{x})\,\, \lvert \det(J_K) \rvert \,\, \dd \widehat{x}
+        \end{align*}
+        % $$\boxed{
+        %     \phi_\alpha(\Phi_k(\widehat{x})) = \widehat{\phi}_\alpha(\widehat{x})
+        % }$$
+
+    \subsubsubsection{Local Shape Functions for linear approach}
+        \vspace{0.5em}
+        $$
+        \widehat{\phi}_1(\widehat{x}) = 1 - \widehat{x} - \widehat{y} \qquad \widehat{\phi}_2(\widehat{x}) = \widehat{x} \qquad \widehat{\phi}_3(\widehat{x}) = \widehat{y}
+        $$
+        \vspace{-1.5em}

@@ -1,0 +1,55 @@
+\subsection{Explicit FD (EFD) \texorpdfstring{\hfill $\mathcal{O}(\Delta t^1 + \Delta x^2)$}{O(t1+x2)}}
+    Discretize domain into $(N+2)\times(M+2)$ equally spaced points.
+    $$
+    \Delta x = \frac{1}{N+1} \qquad \Delta t = \frac{T}{M+1}
+    $$
+    \begin{align*}
+        x_0 = 0, && x_{N+1} &= 1, && x_i = i \cdot \Delta x, && i = 1, \dots ,N\\
+        t^0 = 0, && t^{M+1} &= T, && t^n = n \cdot \Delta t, && n = 1, \dots ,M
+    \end{align*}
+    \textbf{Discretize Solution:}\hspace{1em} $u_i^n = u(x_i,t^n)$\\[0.5em]
+    Discretizing the derivatives, we get the FD Scheme:
+    $$
+        \underbrace{\frac{u_i^{n+1} - u_i^{n}}{\Delta t}}_{\textrm{FE}} - \underbrace{\frac{u_{i+1}^{n} -2 u_{i}^{n} + u_{i-1}^{n}}{\Delta x^2}}_{\textrm{central finite difference}} = 0
+    $$
+    Defining $\lambda = \frac{\Delta t}{\Delta x^2}$, delivers $U^{n+1} = (\mathbb{I} - \lambda \cdot \mathcal{A}) \cdot U^n$
+    $$\boxed{
+        u_{i}^{n+1} = (1- 2 \lambda) \cdot u_{i}^{n} + \lambda \cdot u_{i+1}^{n} + \lambda \cdot  u_{i-1}^{n}
+    }$$
+    \subsubsection{Stability EFD}
+        \textbf{Courant-Friedrichs-Lewy (CFL) condition:}
+        $$
+            \frac{\Delta t}{\Delta x^2} =\vcentcolon \lambda \leq \frac{1}{2}
+        $$
+        EFD scheme is \textit{stable} iff CFL condition is satisfied.
+    \subsubsection{Discrete Maximum Principle EFD}
+        \vspace{-1em}
+        $$\boxed{
+            \min(0,\min_ju_j^0) \leq u_j^{n+1} \leq  \max(0,\max_ju_j^0)
+        }$$
+        \vspace{-0.5em}
+
+        Consider the FD scheme with $\lambda \leq \frac{1}{2}$.
+        $$
+            u_{i}^{n+1} = (1- 2 \lambda) \cdot u_{i}^{n} + \lambda \cdot u_{i+1}^{n} + \lambda \cdot  u_{i-1}^{n}
+        $$
+        \vspace{2pt}
+        Let $\bar{u}_i^n = \max(u_{i-1}^n,u_i^n,u_{i+1}^n)$, and by definition:
+        \vspace{2pt}
+        $$
+            u_{j-1}^n \leq \bar{u}_j^n, \quad u_{j}^n \leq \bar{u}_j^n, \quad  u_{j+1}^n \leq \bar{u}_j^n
+        $$
+        Therefore one can write:
+        \begin{align*}
+            u_{i}^{n+1} &\leq (1- 2 \lambda) \cdot \bar{u}_{i}^{n} + \lambda \cdot \bar{u}_{i}^{n} + \lambda \cdot  \bar{u}_{i}^{n}\\
+                        &\leq \bar{u}_{i}^{n} = \max(u_{i-1}^n,u_i^n,u_{i+1}^n)
+        \end{align*}
+    \subsubsection{Truncation Error EFD \texorpdfstring{\hfill $T_j^n$}{Tjn}}
+        \vspace{-0.5em}
+        $$
+            T_j^n = \frac{u_{j}^{n+1} - u_{j}^{n}}{\Delta t} - \frac{u_{j-1}^{n} - 2 u_{j}^{n} + u_{j+1}^{n}}{\Delta x ^2}
+        $$
+        $$\boxed{
+            \lvert T_j^n \rvert \leq C \big(\Delta t + \Delta x^2\big)
+        }$$
+        
