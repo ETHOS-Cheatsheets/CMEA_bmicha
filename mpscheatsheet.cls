@@ -114,7 +114,7 @@
 \long\def\author#1{\def\@docauthor{#1}}
 
 \RequirePackage{fancyhdr}
-\RequirePackage{hyperref}
+\RequirePackage[hidelinks]{hyperref}
 \RequirePackage{lastpage}
 \pagestyle{fancy}
 \fancyhf{}
