@@ -1,0 +1,20 @@
+\subsection{Initial Value Problem (IVP)}
+    \densify{\vspace{-1em}
+    $$
+        F\left(t,u,u',\dots,u^{(k)}\right) = 0, \qquad u'(t) = F(t,u(t))
+    $$
+    $$
+        \textrm{with }\ u^{(i)}(0) = u_i, \quad i = 0, \dots, k-1
+    $$
+    \vspace{-1em}}
+    \subsubsection{Lipschitz Theorem}
+        If $F(t,u(t))$ is \textbf{lipschitz-continuous}, there exists a time interval $[0,T^*]$, in which the IVP has a \textbf{unique} solution.
+        \mathbox{
+            \lVert F(t,u) - F(t,u^*) \rVert \leq L \cdot \lVert u - u^* \rVert
+        }
+        with any vector norm $\lVert \cdot \rVert$ and
+        $$
+            (u,t), (u^*, t) \in [0,T] \times u, \qquad L >0 
+        $$
+        \vskip4pt
+        \textit{"An lc function is limited in how fast it can change."}

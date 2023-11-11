@@ -1,0 +1,20 @@
+\vspace{0.5em}
+\mathbox{
+    -\Delta u = f
+}
+\subsection{1D PE \texorpdfstring{\hfill}{-} Dirichlet BC}
+    \vspace{-0.5em}
+    $$
+        \begin{cases}
+            -u_{xx} &= f(x)\\
+            \phantom{-}u(0) &= u(1) = 0
+        \end{cases}
+    $$
+    \begin{align*}
+        u(x) &= \int_0^1 G(x,y) \cdot f(y) \cdot dy\\
+        G(x,y) &=
+        \begin{cases}
+            y(1-x)\quad 0 \leq y \leq x\\
+            x(1-y)\quad x \leq y \leq 1
+        \end{cases}
+    \end{align*}

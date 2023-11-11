@@ -1,0 +1,31 @@
+%!Tex root=ZF_bmicha_CMEA.tex
+\subsection{Generate Mesh}
+    \begin{minipage}{0.49\linewidth}
+        \resizebox{\linewidth}{!}{
+            \includegraphics[
+                page = {115},
+                trim = {6.8cm, 14.8cm, 6.96cm, 9.7cm},
+                clip
+            ]{FEM-Implementation/script.pdf}
+        }   
+    \end{minipage}
+    \begin{minipage}{0.48\linewidth}
+        \vspace{-0.5em}
+        \begin{align*}
+            Z &= 
+            \begin{bmatrix}
+                0 & \frac{1}{2} & 1 & \cdots\\
+                0 & 0 & 0 & \cdots
+            \end{bmatrix}\\
+            T &= 
+            \begin{bmatrix}
+                1 & 2 & 2 & \cdots\\
+                2 & 5 & 3 & \cdots\\
+                5 & 6 & 6 & \cdots
+            \end{bmatrix}
+        \end{align*}
+    \end{minipage}
+    \begin{align*}
+        Z \in \mathbb{R}^{2\times N}&: \quad Z(\, :\, ,j)=\mathcal{N}_j \quad \textrm{(vertex coords)}\\
+        T \in \mathbb{R}^{3\times M}&: \quad T(\, :\, ,i)=\textrm{vertices of triangle i}
+    \end{align*}

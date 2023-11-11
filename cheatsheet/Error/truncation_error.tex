@@ -1,0 +1,50 @@
+\subsection{Truncation Error \texorpdfstring{$T_n$}{Tn}}
+    \begin{enumerate}
+        \item write scheme in \textit{consistent} form as: $Q(\dots) = 0$
+        \item plug exact solution $u(t^{n})$ into $Q$ $\rightarrow  Q_{T_n} = T_n$
+    \end{enumerate}
+    $$
+        T_n =  \mathcal{O}(\Delta t^\alpha) = \mathcal{O}(N^{-\alpha})
+    $$
+    \begin{center}
+        $\rightarrow$ Numerical Method is of order $\alpha$.
+    \end{center}
+    {\small\textit{consistent form}: $u' = F$ $\rightarrow$ plug in approx for $u'$}
+    \subsubsubsection{Taylor Expansion}
+        Taylor expansion of $f(x)$ about $a$:
+        \mathbox{
+            f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x-a)^n
+        }
+        $$
+            f(x) = f(a) + \frac{f'(a)}{1!}(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \dots
+        $$
+        \begin{align*}
+             f(\boldsymbol{x}_0) &+ \frac{\partial f(\boldsymbol{x}_0)}{\partial x_1} \frac{\Delta x_1}{1!} + \frac{\partial f(\boldsymbol{x}_0)}{\partial x_2} \frac{\Delta x_2}{1!} + \frac{\partial^2 f(\boldsymbol{x}_0)}{\partial x_1^2} \frac{\Delta x_1^2}{2!} \\
+            &+ \frac{\partial^2 f(\boldsymbol{x}_0)}{\partial x_2^2} \frac{\Delta x_2^2}{2!} + 2 \cdot \frac{\partial^2 f(\boldsymbol{x}_0)}{\partial x_1\partial x_2} \frac{\Delta x_1\Delta x_2}{2!} + \dots
+        \end{align*}
+
+    \subsubsection{Example FE}
+        { % change enumerate locally
+            \setlist[enumerate]{
+                itemsep     = 0.3em,%
+                topsep      = 0.4em,%
+                parsep      = 0.4em,%
+                itemindent  = 1em,%
+                leftmargin  = 0.4em %
+            }
+            \vspace{0.5em}
+                \mathbox[(scheme)]{u^{n+1} = u^n + \Delta t \cdot F(t^n,u^n)}
+                
+                    \begin{enumerate}
+                        \item $Q = \frac{1}{\Delta t} \cdot \left( u^{n+1} - u^{n}  \right) - F(t^n,u^n) = 0$
+                        \item $T_n = \frac{1}{\Delta t} \cdot \left( u(t^{n+1}) - u(t^{n})  \right) - F(t^n,u(t^n))$
+                \end{enumerate}
+               {\small \textit{Taylorexpand $u(t^{n+1})$ about $t^n$}:
+                $$
+                    u(t^{n+1}) = u(t^n) + u'(t^n) \cdot \Delta t + \frac{u''(t^n)}{2!} \cdot (\Delta t)^2 + \mathcal{O}(\Delta t ^3)
+                $$}
+                $$
+                    T_n = \frac{u''(t^n)}{2!} \cdot \Delta t + \mathcal{O}(\Delta t ^2) \approx C \cdot \mathcal{O}(\Delta t)
+                $$
+                The truncation error is of first order. $\mathcal{O}(\Delta t^1)$
+        }

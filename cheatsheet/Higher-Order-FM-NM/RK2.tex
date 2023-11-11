@@ -1,0 +1,18 @@
+\subsection{Runge-Kutta-2 (RK-2) \texorpdfstring{\hfill $\mathcal{O}(\Delta t^2)$}{O(t2)}}
+    \vspace{2pt}
+    Midpoint Rule with $u^{n+\frac{1}{2}}$ approximated with FE.
+    $$
+        \begin{cases}
+            y_1 &= u^n\\
+            y_2 &= u^n +  \frac{\Delta t}{2} \cdot F(t^n, y_1)\\
+            u^{n+1} &= u^n +  \Delta t \cdot F\left(t^{n+\frac{1}{2}}, y_2 \right)\\
+            u^0 &= u_0
+        \end{cases}
+    $$
+    \mathbox{
+        u^{n+1} = u^n + \Delta t \cdot F\left(t^{n+\frac{1}{2}}, u^n +  \frac{\Delta t}{2} \cdot F(t^n, u^n) \right)
+    }
+    \begin{itemize}
+        \item[$\oplus$] fast (faster than trapez.), no extra memory
+        \item[$\ominus$] limited stability (needs small $\Delta t$)
+    \end{itemize}

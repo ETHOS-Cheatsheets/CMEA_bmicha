@@ -1,0 +1,12 @@
+%!Tex root=ZF_bmicha_CMEA.tex
+\subsection{Exact Solution}
+    By \textit{separation of variables} with the ansatz 
+    $$u(x,t) = \mathcal{T}(t) \cdot \mathcal{X}(x)$$
+    we obtain the exact solution
+    \begin{align*}
+        u(x,t) &= \sum\limits_{k=1}^{\infty} u_k^0  \cdot \sin(k\pi x) \cdot e^{-(k\pi)^2 t}\\
+        u_k^0 &= 2  \int_0^1 u_0(x) \sin(k\pi x)\, \dd x,\quad k \in \mathbb{N}
+    \end{align*}
+    \textbf{Error} due to finite truncation of Fourier sine series.\\
+    \textbf{Error} due to use of QR to approximate integrals.
+    
